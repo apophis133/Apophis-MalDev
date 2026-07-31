@@ -1,55 +1,72 @@
-# Malware Dev Notes
+# Apophis MalDev Notes
 
-A collection of code snippets and common techniques used in malware, for educational and defensive research purposes.
+A defensive reference for understanding behaviors commonly observed during malware analysis. The repository organizes conceptual examples by [MITRE ATT&CK](https://attack.mitre.org/) technique so analysts can connect implementation patterns with detection and investigation guidance.
 
-> **This repository does not contain live, functional, or weaponized malware.**
-> Snippets here are conceptual illustrations used to explain a technique — not working payloads.
-> No live malicious code, exploits, or working payloads.
-> No links to active C2 infrastructure or live samples.
-> Reference only publicly disclosed threats (CVEs, vendor write-ups, MITRE ATT&CK entries).
+> [!CAUTION]
+> This repository is for educational and defensive research only. Use an isolated, network-segmented lab such as FLARE-VM or REMnux. Never test unknown code or samples on production systems.
 
-## Purpose
+## Repository goals
 
-This repo documents how certain malicious techniques work conceptually; the goal is to build defensive and analytical skill, not to provide
-copy-paste offensive tooling.
+- Explain adversary behaviors from a defender's perspective.
+- Map examples to public MITRE ATT&CK techniques and sub-techniques.
+- Highlight useful telemetry, investigation questions, and mitigations.
+- Keep content navigable for SOC, DFIR, reverse-engineering, and security students.
 
-## Intended Audience
+This repository is not intended to provide deployable malware, exploits, payloads, command-and-control infrastructure, or evasion tooling.
+
+## Technique index
+
+| ATT&CK technique | Topic | Content |
+| --- | --- | --- |
+| [T1547](https://attack.mitre.org/techniques/T1547/) | Boot or Logon Autostart Execution | [Overview](T1547/README.md) |
+| [T1547.001](https://attack.mitre.org/techniques/T1547/001/) | Registry Run Keys / Startup Folder | [Defensive notes and example](T1547/001/README.md) |
+
+## Repository structure
+
+```text
+.
+├── README.md
+├── CONTRIBUTING.md
+└── T1547/
+    ├── README.md
+    └── 001/
+        ├── README.md
+        └── svchost.c
+```
+
+Content follows this convention:
+
+```text
+T####/                 ATT&CK technique
+├── README.md           Technique overview and child index
+└── ###/                Sub-technique identifier
+    ├── README.md       Defensive analysis notes
+    └── <example files>
+```
+
+## How to use this repository
+
+1. Start with the [technique index](#technique-index).
+2. Read the technique and sub-technique notes before reviewing an example.
+3. Compare the documented behavior with telemetry from an isolated lab or approved dataset.
+4. Follow the linked ATT&CK and vendor references for current detection guidance.
+
+Examples may interact with operating-system features and are not guaranteed to be safe to compile or execute. Treat every source file as untrusted research material.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for naming conventions, documentation requirements, and safety boundaries. New content should emphasize observable behavior and defensive value rather than operational capability.
+
+## Intended audience
 
 - SOC analysts and incident responders
-- Malware reverse engineers / DFIR practitioners
-- Students in security research or CTF training
-
-## Safety Notes
-
-Any hands-on analysis referenced here assumes use of an isolated, network-segmented VM/sandbox (e.g., FLARE-VM, REMnux) — never analyze live samples on a host connected to a production network.
+- Malware reverse engineers and DFIR practitioners
+- Security researchers and students working in controlled labs
 
 ## Disclaimer
 
-This project is for educational and defensive research purposes only.
-Content is intended to help defenders understand adversary techniques.
-The maintainers do not condone or support the use of this material to
-create, deploy, or distribute malicious software. Use responsibly and in
-accordance with your local laws and your organization's policies.
+The maintainers do not condone or support creating, deploying, or distributing malicious software. Use this material responsibly and in accordance with applicable laws, organizational policies, and authorization boundaries.
 
 ## License
-MIT License
 
-Copyright (c) 2026
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Licensed under the [MIT License](LICENSE).
