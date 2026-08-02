@@ -20,7 +20,7 @@ Correlate configuration changes with process, file, registry, identity, and endp
 
 | Sub-technique | Description | Notes |
 | --- | --- | --- |
-| [T1547.001](https://attack.mitre.org/techniques/T1547/001/) | Registry Run Keys / Startup Folder | [Defensive notes](001/README.md) |
+| [T1547.001](https://attack.mitre.org/techniques/T1547/001/) | Registry Run Keys / Startup Folder | [Source example](001/svchost.c) |
 
 ## References
 
